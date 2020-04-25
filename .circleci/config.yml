@@ -25,14 +25,10 @@ workflows:
 
 jobs:
   unit-tests:
-    parameters:
-      version:
-        type: string
     docker:
       - image: circleci/node:12
     steps:
       - setup
-      - build
       - test
 
   publish:
@@ -40,7 +36,6 @@ jobs:
       - image: circleci/node:12
     steps:
       - setup
-      - build
       - test
       - publish
 
@@ -56,26 +51,11 @@ commands:
           name: Install Dependencies
           command: yarn install --pure-lockfile
 
-  build:
-    steps:
-      - run:
-          name: Build
-          command: yarn build
-
   test:
     steps:
       - run:
           name: Test
           command: yarn test
-
-  publish-dry-run:
-    steps:
-      - run:
-          name: NPM Auth
-          command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-      - run:
-          name: Release (Dry Run)
-          command: npx rollingversions publish --dry-run
 
   publish:
     steps:
