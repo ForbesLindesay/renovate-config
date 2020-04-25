@@ -3,6 +3,7 @@ const {deepEqual} = require('assert');
 
 const pkg = {
   name: '@forbeslindesay/renovate-config',
+  publishConfig: {access: 'public'},
   repository: 'git@github.com:ForbesLindesay/renovate-config.git',
   author: 'Forbes Lindesay <forbes@lindesay.co.uk>',
   license: 'MIT',
